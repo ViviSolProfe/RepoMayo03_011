@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <title>EJ Post</title>
+    <script>
+        let url='https://jsonplaceholder.typicode.com/posts';
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => mostrarData(data))
+            .catch(error=>console.log(error))
+
+        const mostrarData=(data)=>{
+            console.log(data)
+            let body=""
+            for(var i=0; i<data.length; i++)
+            {
+                if(data[i].userId==3){
+                    body+=`<tr>
+                        <td><p class="user">${data[i].userId}</p></td>
+                        <td>${data[i].id}</td>
+                        <td>${data[i].title}</td>
+                        <td><p>${data[i].body}</p></td>
+                        </tr>`
+                }
+            }
+            document.getElementById('data').innerHTML=body
+        }
+    </script>
+    <style>
+        p{
+            color:blue;
+            text-align: justify;
+            padding: 10px;
+        }
+        .user{
+            color:brown;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Ej API Json Users</h2>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>User Id</th>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Body</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="data">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
